@@ -19,13 +19,6 @@ Planned implementation order:
 
 ## Contents
 
-- [tensor-internals.md](./tensor-internals.md) — detailed notes, Sections 1-17
-- [Resources](#resources) — reading list (in this file, below)
-
-## Detailed Guide (Sections 1-17)
-
-All in-depth material lives in [tensor-internals.md](./tensor-internals.md):
-
 1. [PyTorch Source Files to Read for Tensor Implementation](./tensor-internals.md#1-pytorch-source-files-to-read-for-tensor-implementation)
 2. [Core Model: Tensor as View over Storage](./tensor-internals.md#2-core-model-tensor-as-view-over-storage)
 3. [Sizes, Strides, and Storage Offset](./tensor-internals.md#3-sizes-strides-and-storage-offset)
@@ -53,30 +46,30 @@ This is the curated reading list for the from-scratch implementation. Start with
 ### Official PyTorch documentation
 
 - Tensor basics, creation, indexing, views, and `stride` / `storage_offset` semantics:
-  `https://pytorch.org/docs/stable/tensors.html`
+  [PyTorch Tensor docs](https://pytorch.org/docs/stable/tensors.html)
 - Storage and `UntypedStorage` (`data_ptr`, `nbytes`, lifetime, `set_`):
-  `https://pytorch.org/docs/stable/storage.html`
+  [PyTorch Storage docs](https://pytorch.org/docs/stable/storage.html)
 - Autograd mechanics (`grad_fn`, `save_for_backward`, version counters, hooks, `no_grad`, `inference_mode`):
-  `https://pytorch.org/docs/stable/notes/autograd.html`
+  [Autograd notes](https://pytorch.org/docs/stable/notes/autograd.html)
 - Automatic mixed precision (`autocast`, `GradScaler`):
-  `https://pytorch.org/docs/stable/amp.html`
+  [AMP docs](https://pytorch.org/docs/stable/amp.html)
 - `torch.compile`, TorchDynamo, TorchInductor, dynamic shapes, and logging:
-  `https://pytorch.org/docs/stable/torch.compiler.html`
+  [torch.compiler docs](https://pytorch.org/docs/stable/torch.compiler.html)
 - CUDA memory management (`memory_summary`, `memory_snapshot`, caching allocator behavior):
-  `https://pytorch.org/docs/stable/notes/cuda.html`
+  [CUDA notes](https://pytorch.org/docs/stable/notes/cuda.html)
 - Extending PyTorch with custom ops and C++/CUDA extensions (`TensorAccessor`, dispatch registration):
-  `https://pytorch.org/docs/stable/notes/extending.html`
+  [Extending PyTorch notes](https://pytorch.org/docs/stable/notes/extending.html)
 
 ### PyTorch internals writing
 
 - Edward Z. Yang, "PyTorch Internals" (2019). The best single overview of `TensorImpl`, Storage, the dispatcher, and autograd generation:
-  `https://blog.ezyang.com/2019/05/pytorch-internals/`
+  [PyTorch Internals — ezyang](https://blog.ezyang.com/2019/05/pytorch-internals/)
 - PyTorch dispatcher and operator-registration deep dives, including the ZeroEntropy series on dispatch keys, boxed/unboxed calls, and backend kernels. Search "PyTorch dispatcher ZeroEntropy" for the current mirror.
 - PyTorch developer discussions and design docs on version counters, saved tensors, `inference_mode`, channels-last, and the caching allocator. These are linked from the docs pages above and from issues in `pytorch/pytorch`.
 
 ### Source code to read while implementing
 
-Clone `https://github.com/pytorch/pytorch` and focus on these paths:
+Clone [pytorch/pytorch](https://github.com/pytorch/pytorch) and focus on these paths:
 
 - `aten/src/ATen/core/TensorImpl.h` and `StorageImpl.h`: the exact fields summarized in Sections 2-6 of tensor-internals.md.
 - `aten/src/ATen/native/cpu/`: reference CPU kernels for elementwise ops and reductions.
@@ -87,15 +80,15 @@ Clone `https://github.com/pytorch/pytorch` and focus on these paths:
 For NumPy stride behavior used in the labs:
 
 - NumPy `ndarray` internals and `as_strided` documentation:
-  `https://numpy.org/doc/stable/reference/arrays.ndarray.html`
+  [NumPy ndarray docs](https://numpy.org/doc/stable/reference/arrays.ndarray.html)
 
 ### From-scratch teaching implementations
 
 These projects rebuild autograd and tensor machinery at small scale and are useful models for this repository:
 
 - Andrej Karpathy, `micrograd`: minimal scalar autograd engine, ideal before writing tensor-level backward:
-  `https://github.com/karpathy/micrograd`
+  [micrograd](https://github.com/karpathy/micrograd)
 - `minitorch`: tensor Storage plus operators, broadcasting, and autograd in Python, closest in spirit to this project:
-  `https://github.com/minitorch/minitorch`
+  [minitorch](https://github.com/minitorch/minitorch)
 - `tinygrad`: small tensor runtime with lazy evaluation, fusion, and multiple backends:
-  `https://github.com/tinygrad/tinygrad`
+  [tinygrad](https://github.com/tinygrad/tinygrad)

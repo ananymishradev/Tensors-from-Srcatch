@@ -1,12 +1,10 @@
 # Tensor Internals: Detailed Notes (Sections 1-17)
 
-> Detailed companion to [README.md](./README.md). Sections 1-17 live here. The project overview, implementation order, and Resources list stay in the README.
-
 ---
 
 ## 1. PyTorch Source Files to Read for Tensor Implementation
 
-I am reading the PyTorch files in this order while building the from-scratch Tensor in this repository. Paths are relative to a clone of `https://github.com/pytorch/pytorch`.
+I am reading the PyTorch files in this order while building the from-scratch Tensor in this repository. Paths are relative to a clone of [pytorch/pytorch](https://github.com/pytorch/pytorch).
 
 
 ### 1A. Storage and Tensor metadata (build Sections 2-6 first)
